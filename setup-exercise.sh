@@ -1,4 +1,7 @@
 #!/bin/bash
+az login
+
+az account set --subscription 533f6b10-3a70-4c5d-8962-8b51e839a13c
 
 apiappname=PrintFramerAPI$(openssl rand -hex 5)
 
@@ -12,7 +15,7 @@ git config --global user.name "$GIT_USERNAME"
 git config --global user.email "$GIT_EMAIL"
 
 
-RESOURCE_GROUP=$(az group list --query "[0].name" -o tsv)
+RESOURCE_GROUP=cloud-integration-training-students
 
 # Create App Service plan
 PLAN_NAME=myPlan
@@ -21,7 +24,7 @@ PLAN_NAME=myPlan
 printf "\nCreating App Service plan in FREE tier ... (2/7)\n\n"
 
 
-az appservice plan create --name $apiappname --resource-group $RESOURCE_GROUP --sku FREE --verbose
+az appservice plan create --name $apiappname --resource-group $RESOURCE_GROUP --sku B1 --verbose
 
 printf "\nCreating API App ... (3/7)\n\n"
 
